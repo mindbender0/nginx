@@ -1,0 +1,35 @@
+services:
+  web1:
+    image: my-static-website
+    networks:
+      - web-network
+    labels:
+      - "traefik.enable=true"
+
+  web2:
+    image: my-static-website
+    networks:
+      - web-network
+    labels:
+      - "traefik.enable=true"
+
+  web3:
+    image: my-static-website
+    networks:
+      - web-network
+    labels:
+      - "traefik.enable=true"
+
+  nginx-proxy:
+    image: nginx
+    networks:
+      - web-network
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-proxy/default.conf:/etc/nginx/conf.d/default.conf
+
+networks:
+  web-network:
+    driver: bridge
+
